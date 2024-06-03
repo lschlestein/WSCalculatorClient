@@ -82,4 +82,29 @@ public class Main {
         .
 ```
 
+A URL obtemos de nosso server, ou seja, aonde o WS está sendo publicado. Nas primeiras linhas do WSDL.
+a Qname (Qualified name) obtemos de nosso WSDL:
+
+http://localhost:8085/servico/calculator?wsdl
+``` xml
+<definitions
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:tns="http://servico.webservices.academia.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://servico.webservices.academia.com/" name="CalculatorImplService">
+```
+
+Após, é só rodarmos a aplicação e conferir o resultado enviado pelo nosso WS.
+
+``` shell
+O resultado de: A:5.0 B:4.0
+Add: 8.0
+Sub: 2.0
+Mult: 15.0
+Div: 1.6666666666666667
+```
+
+
+
 
