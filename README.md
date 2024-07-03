@@ -65,6 +65,13 @@ Indicar o caminho onde está nosso projeto:
 ```
 Executar a build do maven (clean install) e verificar se foi criado o pacote, classes e interfaces baseados em nosso serviço anteriormente publicado.
 
+Gerada automaticamente pelo plugin.
+![image](https://github.com/lschlestein/WSCalculatorClient/assets/103784532/c2a384e6-d5db-4c5f-8bbc-c0df253af6c9)
+
+Maiores informações:
+[JAX-WS Maven Plugin](https://www.mojohaus.org/jaxws-maven-plugin/wsimport-mojo.html)
+
+
 Em seguida, podemos consumir os serviços através de nossa aplicação java:
 
 ``` java
