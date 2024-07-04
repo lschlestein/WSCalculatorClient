@@ -36,7 +36,7 @@ Configuradas nossas depedências, loga em seguida, faremos uso da ferramenta WsI
                         <wsdlUrl>http://localhost:8085/servico/calculator?wsdl</wsdlUrl>
                     </wsdlUrls>
                     <keep>true</keep>
-                    <packageName>servico</packageName>
+                    <packageName>com.service.client</packageName>
                     <sourceDestDir>src/main/java</sourceDestDir>
                 </configuration>
             </plugin>
@@ -83,11 +83,10 @@ public class ServerUtil {
             URL url = new URL("http://localhost:8085/servico/calculator?wsdl");
             QName qname = new QName("http://servico.webservices.academia.com/", "CalculatorImplService");
             service = Service.create(url, qname);
-        } catch (
-                MalformedURLException e) {
+        } catch (MalformedURLException e) {
+            System.out.println("Verifique se a URL informada está correta " + e.getMessage());
             e.printStackTrace();
-        } catch (
-                WebServiceException e) {
+        } catch (WebServiceException e) {
             System.out.println("Não foi Possível Conectar ao Web Service" + e.getMessage());
             e.printStackTrace();
         }
@@ -99,7 +98,7 @@ A URL é o endereço, onde nosso Web Service foi hospedado. Esse endereço bem c
 ``` java
 URL url = new URL("http://localhost:8085/servico/calculator?wsdl");
 ```
-A Qname também foi configurada em nosso servidor anteriormente. Com o servidor rodando, esse endereço pode ser obtido acessando nosso server via browser e localizando a informação *targetNamespace* :
+A Qname (qualified name de nosso XML) também foi configurada em nosso servidor anteriormente. Com o servidor rodando, esse endereço pode ser obtido acessando nosso server via browser e localizando a informação *targetNamespace* :
 
  ``` xml
 <!--  Published by JAX-WS RI (https://github.com/eclipse-ee4j/metro-jax-ws). RI's version is JAX-WS RI 3.0.0 git-revision#af8101a.  -->
@@ -129,7 +128,8 @@ public class Main {
             double a = 5, b = 4, result = 0;
             result = calculator.add(5, 3);
             System.out.println("O resultado de: A:" + a + " B:" + b);
- 	    .
+ 	        result = calculator.add(5, 3);
+            System.out.println("Add: " + result);
 	    .
 	    .
         }
