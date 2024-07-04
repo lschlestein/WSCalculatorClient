@@ -1,5 +1,6 @@
 # Web Service (Client)
-Repositório onde é demonstrado um Web Service Básico com JAX-WS.
+Repositório onde é demonstrado como consumir um Web Service Básico com JAX-WS.
+O lado oposto a essa implementação (Server) pode ser encontrado aqui:
 Para implementar esse WS (Web Service) as dependencias básicas necessárias são as seguintes:
 
 ``` xml
@@ -63,98 +64,88 @@ O pacote com.service.client é gerado pelo WsImport, bem como a interface Calcul
 
 ![image](https://github.com/lschlestein/WSCalculatorClient/assets/103784532/dda7b73c-c79a-46d2-92bb-e0af6d27c1ff)
 
+Em seguida precisamos criar uma classe cujo a qual fará a conexão com nosso Web Service:
 
-É necessário anotar essa interface com @Webservice.
-Já a anotação @SOAPBinding, configura o retorno de nosso serviço. 
-Deixo uma fonte para maiores informações:
-https://developer.ibm.com/articles/ws-whichwsdl/
-
-Também é necessário anotar cada um de nossos métodos (serviços) que serão disponiblizados posteriormente.
-
-
-Já na implementação é necessário também utilizar a anotação @WebService, porém, apontando para a nossa interface (Calculator)
-
-@WebService(endpointInterface = "com.academia.webservices.servico.Calculator")
-
-(CalculatorImpl.java) - Service Implementation Bean (SIB)
-```java
-@WebService(endpointInterface = "com.academia.webservices.servico.Calculator")
-public class CalculatorImpl implements Calculator {
-
-	@Override
-	public double add(double a, double b) {
-		return a+b;
-	}
-.
-.
-.
-```
-Após, devemos rodar nosso WS, em uma classe principal:
-Criamos uma instância de nosso CalculatorImpl e em seguida publicamos o serviço:
-Nesse caso estamos utilizando a porta 8085.
 ``` java
-public class Main {
-    public static void main(String[] args) {
-        CalculatorImpl calculator = new CalculatorImpl();
-        Endpoint.publish("http://localhost:8085/servico/calculator", calculator);
-        System.out.println("Serviço publicado com sucesso");
+
+import jakarta.xml.ws.Service;
+import jakarta.xml.ws.WebServiceException;
+
+import javax.xml.namespace.QName;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class ServerUtil {
+    public static Service getConnection() {
+        Service service = null;
+        try {
+            URL url = new URL("http://localhost:8085/servico/calculator?wsdl");
+            QName qname = new QName("http://servico.webservices.academia.com/", "CalculatorImplService");
+            service = Service.create(url, qname);
+        } catch (
+                MalformedURLException e) {
+            e.printStackTrace();
+        } catch (
+                WebServiceException e) {
+            System.out.println("Não foi Possível Conectar ao Web Service" + e.getMessage());
+            e.printStackTrace();
+        }
+        return service;
     }
 }
 ```
+A URL é o endereço, onde nosso Web Service foi hospedado. Esse endereço bem como sua porta, são configurados no servidor, conforme configurado anteriormente:
+``` java
+URL url = new URL("http://localhost:8085/servico/calculator?wsdl");
+```
+A Qname também foi configurada em nosso servidor anteriormente. Com o servidor rodando, esse endereço pode ser obtido acessando nosso server via browser e localizando a informação *targetNamespace* :
 
-Para empacotar a aplicação é necessário configurar arquivo pom.xml, para copiar as depedências para dentro da pasta /libs conforme segue:
-```xml
-<build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}/libs
-                            </outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>
-                                Main
-                            </mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+ ``` xml
+<!--  Published by JAX-WS RI (https://github.com/eclipse-ee4j/metro-jax-ws). RI's version is JAX-WS RI 3.0.0 git-revision#af8101a.  -->
+<!--  Generated by JAX-WS RI (https://github.com/eclipse-ee4j/metro-jax-ws). RI's version is JAX-WS RI 3.0.0 git-revision#af8101a.  -->
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://servico.webservices.academia.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://servico.webservices.academia.com/" name="CalculatorImplService">
+```
+``` java
+QName qname = new QName("http://servico.webservices.academia.com/", "CalculatorImplService");
 ```
 
-Após, empacotar a aplicação (maven clean package), localizar o diretório onde está o .jar criado, e rodar a aplicação.
-A mensagem Serviço publicado com sucesso deverá ser mostrada.
-``` shell
-C:\Users\Lucas\eclipse-workspace\WSCalculatorServer\target>java -jar WSCalculator-1.0-SNAPSHOT.jar
-Serviço publicado com sucesso
+Em seguinda devemos criar nosso service, que acessará o servidor para interação cliente x servidor.
+```java
+service = Service.create(url, qname);
 ```
 
-Para confirmar, acessar no navegador o endereço:
-http://localhost:8085/servico/calculator
-![image](https://github.com/lschlestein/WSCalculatorServer/assets/103784532/b586eb5d-53a6-4920-b0b0-71498edcb1de)
+Como nossa classe de conexão ao Web Service devidamente configurada podemos agora consumir os serviçõs de nosso servidor:
 
-Se tudo estiver ocorrido como o esperado, o WS estará rodando.
-É possível testa-lo com o SoapUI no link:
-http://localhost:8085/servico/calculator?wsdl
+``` java
+import com.service.client.Calculator;
+import jakarta.xml.ws.Service;
+
+public class Main {
+    public static void main(String[] args) {
+        Service service = com.service.client.ServerUtil.getConnection();
+        if (service != null) {
+            Calculator calculator = service.getPort(Calculator.class);
+            double a = 5, b = 4, result = 0;
+            result = calculator.add(5, 3);
+            System.out.println("O resultado de: A:" + a + " B:" + b);
+ 	    .
+	    .
+	    .
+        }
+    }
+}
+
+```
+Aqui é feita a conexão ao servidor
+```java
+Service service = com.service.client.ServerUtil.getConnection();
+```
+Aqui, dizemos que a implementação da interface Calculator deve ser feita pelo nosso Web Service, hospedado em nosso servidor.
+``` java
+Calculator calculator = service.getPort(Calculator.class);
+```
+
+Logo em seguida passamos por parâmetro a interface, os valores o quais desejamos lançar ao nosso servidor.
+``` java
+ result = calculator.add(5, 3);
+```
