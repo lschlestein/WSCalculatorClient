@@ -2,24 +2,14 @@
 Dependências básicas
 
 ``` xml
-        <dependency>
-            <groupId>jakarta.xml.ws</groupId>
-            <artifactId>jakarta.xml.ws-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>jaxws-rt</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
+    <dependencies>
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-ri</artifactId>
             <version>3.0.0</version>
             <type>pom</type>
         </dependency>
+    </dependencies>
 
 ```
 Além das dependências, precisamos desse plugin, que de forma automática criará as classes para que possamos consumir um serviço SOAP.
