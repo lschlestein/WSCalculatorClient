@@ -15,6 +15,7 @@ Para implementar esse WS (Web Service) as dependencias básicas necessárias sã
 ```
 
 Configuradas nossas depedências, loga em seguida, faremos uso da ferramenta WsImport, a qual implementará as classes necessárias para consumirmos os serviços oferecidos pelo nosso Web Service.
+É importante frisar, que para que a importação ocorra, o server já deve ter sido configurado, e deve estar rodando no momento da compilação do projeto. Certifique-se que ele esteja rodando.
 
 ``` xml
   <build>
