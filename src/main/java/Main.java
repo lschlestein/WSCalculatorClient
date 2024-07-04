@@ -1,10 +1,9 @@
+import com.service.client.Calculator;
 import jakarta.xml.ws.Service;
-import servico.Calculator;
-import servico.ServerUtil;
 
 public class Main {
     public static void main(String[] args) {
-        Service service = ServerUtil.getConnection();
+        Service service = com.service.client.ServerUtil.getConnection();
         if (service != null) {
             Calculator calculator = service.getPort(Calculator.class);
             double a = 5, b = 4, result = 0;
@@ -19,6 +18,5 @@ public class Main {
             result = calculator.div(5, 3);
             System.out.println("Div: " + result);
         }
-
     }
 }

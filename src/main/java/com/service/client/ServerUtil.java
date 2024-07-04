@@ -1,4 +1,4 @@
-package servico;
+package com.service.client;
 
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebServiceException;

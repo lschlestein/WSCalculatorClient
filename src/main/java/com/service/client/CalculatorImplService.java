@@ -1,5 +1,5 @@
 
-package servico;
+package com.service.client;
 
 import java.net.MalformedURLException;
 import java.net.URL;

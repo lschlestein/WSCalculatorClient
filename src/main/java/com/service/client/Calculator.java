@@ -1,5 +1,5 @@
 
-package servico;
+package com.service.client;
 
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
