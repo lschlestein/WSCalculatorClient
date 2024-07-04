@@ -1,6 +1,6 @@
 # Web Service (Client)
 Repositório onde é demonstrado como consumir um Web Service Básico com JAX-WS.
-O lado oposto a essa implementação (Server) pode ser encontrado aqui:
+O lado oposto a essa implementação (Server) pode ser encontrado aqui: [Server](https://github.com/lschlestein/WSCalculatorServer.git)
 Para implementar esse WS (Web Service) as dependencias básicas necessárias são as seguintes:
 
 ``` xml
