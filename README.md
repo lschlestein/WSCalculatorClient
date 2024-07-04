@@ -119,10 +119,11 @@ Como nossa classe de conexão ao Web Service devidamente configurada podemos ago
 ``` java
 import com.service.client.Calculator;
 import jakarta.xml.ws.Service;
+import com.service.client.ServerUtil;
 
 public class Main {
     public static void main(String[] args) {
-        Service service = com.service.client.ServerUtil.getConnection();
+        Service service = ServerUtil.getConnection();
         if (service != null) {
             Calculator calculator = service.getPort(Calculator.class);
             double a = 5, b = 4, result = 0;
