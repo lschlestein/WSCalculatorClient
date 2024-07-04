@@ -11,8 +11,8 @@ public class ServerUtil {
     public static Service getConnection() {
         Service service = null;
         try {
-            URL url = new URL("http://localhost:8085/servico/calculator?wsdl");
-            QName qname = new QName("http://servico.webservices.academia.com/", "CalculatorImplService");
+            URL url = new URL("http://localhost:8085/service/calculator?wsdl");
+            QName qname = new QName("http://service.webservices.com/", "CalculatorImplService");
             service = Service.create(url, qname);
         } catch (
                 MalformedURLException e) {

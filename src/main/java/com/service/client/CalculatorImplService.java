@@ -17,20 +17,20 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "CalculatorImplService", targetNamespace = "http://servico.webservices.academia.com/", wsdlLocation = "http://localhost:8085/servico/calculator?wsdl")
+@WebServiceClient(name = "CalculatorImplService", targetNamespace = "http://service.webservices.com/", wsdlLocation = "http://localhost:8085/service/calculator?wsdl")
 public class CalculatorImplService
     extends Service
 {
 
     private final static URL CALCULATORIMPLSERVICE_WSDL_LOCATION;
     private final static WebServiceException CALCULATORIMPLSERVICE_EXCEPTION;
-    private final static QName CALCULATORIMPLSERVICE_QNAME = new QName("http://servico.webservices.academia.com/", "CalculatorImplService");
+    private final static QName CALCULATORIMPLSERVICE_QNAME = new QName("http://service.webservices.com/", "CalculatorImplService");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8085/servico/calculator?wsdl");
+            url = new URL("http://localhost:8085/service/calculator?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -69,7 +69,7 @@ public class CalculatorImplService
      */
     @WebEndpoint(name = "CalculatorImplPort")
     public Calculator getCalculatorImplPort() {
-        return super.getPort(new QName("http://servico.webservices.academia.com/", "CalculatorImplPort"), Calculator.class);
+        return super.getPort(new QName("http://service.webservices.com/", "CalculatorImplPort"), Calculator.class);
     }
 
     /**
@@ -81,7 +81,7 @@ public class CalculatorImplService
      */
     @WebEndpoint(name = "CalculatorImplPort")
     public Calculator getCalculatorImplPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://servico.webservices.academia.com/", "CalculatorImplPort"), Calculator.class, features);
+        return super.getPort(new QName("http://service.webservices.com/", "CalculatorImplPort"), Calculator.class, features);
     }
 
     private static URL __getWsdlLocation() {

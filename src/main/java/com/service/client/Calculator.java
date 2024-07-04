@@ -15,7 +15,7 @@ import jakarta.xml.ws.Action;
  * Generated source version: 3.0
  * 
  */
-@WebService(name = "Calculator", targetNamespace = "http://servico.webservices.academia.com/")
+@WebService(name = "Calculator", targetNamespace = "http://service.webservices.com/")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface Calculator {
 
@@ -29,7 +29,7 @@ public interface Calculator {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://servico.webservices.academia.com/Calculator/addRequest", output = "http://servico.webservices.academia.com/Calculator/addResponse")
+    @Action(input = "http://service.webservices.com/Calculator/addRequest", output = "http://service.webservices.com/Calculator/addResponse")
     public double add(
         @WebParam(name = "arg0", partName = "arg0")
         double arg0,
@@ -45,7 +45,7 @@ public interface Calculator {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://servico.webservices.academia.com/Calculator/subRequest", output = "http://servico.webservices.academia.com/Calculator/subResponse")
+    @Action(input = "http://service.webservices.com/Calculator/subRequest", output = "http://service.webservices.com/Calculator/subResponse")
     public double sub(
         @WebParam(name = "arg0", partName = "arg0")
         double arg0,
@@ -61,7 +61,7 @@ public interface Calculator {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://servico.webservices.academia.com/Calculator/multRequest", output = "http://servico.webservices.academia.com/Calculator/multResponse")
+    @Action(input = "http://service.webservices.com/Calculator/multRequest", output = "http://service.webservices.com/Calculator/multResponse")
     public double mult(
         @WebParam(name = "arg0", partName = "arg0")
         double arg0,
@@ -77,7 +77,7 @@ public interface Calculator {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://servico.webservices.academia.com/Calculator/divRequest", output = "http://servico.webservices.academia.com/Calculator/divResponse")
+    @Action(input = "http://service.webservices.com/Calculator/divRequest", output = "http://service.webservices.com/Calculator/divResponse")
     public double div(
         @WebParam(name = "arg0", partName = "arg0")
         double arg0,
